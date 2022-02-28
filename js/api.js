@@ -20,7 +20,9 @@ const searchPhone=()=>{
 
 const showPhones=phones=>{
     const searchResult=document.getElementById("search-result")
-    phones.forEach(phone=>{
+    searchResult.textContent="";
+    const twentyPhone=phones.slice(0,20);
+    twentyPhone.forEach(phone=>{
         console.log(phone);
         const div=document.createElement("div");
         div.classList.add("col");
@@ -44,6 +46,26 @@ const loadPhoneDetail=phoneid=>{
     const url= `https://openapi.programming-hero.com/api/phone/${phoneid}`
     fetch(url)
     .then(res=>res.json())
-    .then(data=>console.log(data.data.brand))
+    .then(data=>showPhoneDetails(data.data))
+
+}
+const showPhoneDetails=phoneinfo=>{
+    console.log(phoneinfo)
+    const others=phoneinfo.others;
+    const pairs=Object.entries(others);
+    const phoneDetails=document.getElementById("phone-details");
+    const div=document.createElement("div");
+    div.classList.add("card");
+    div.innerHTML=` 
+        <h1 class="text-center">${phoneinfo.name}</h1>
+        <img src="${phoneinfo.image}" style="width: 170px;" class="card-img-top mx-auto" alt="...">
+        <div class="card-body">
+            <h4 class="card-text">Sensors:${phoneinfo.mainFeatures.sensors[0]}, ${phoneinfo.mainFeatures.sensors[1]},${phoneinfo.mainFeatures.sensors[2]},${phoneinfo.mainFeatures.sensors[3]},${phoneinfo.mainFeatures.sensors[4]},${phoneinfo.mainFeatures.sensors[5]}</h4>
+            <h5 class="card-text">${pairs} </h5>
+           <h5 class="card-text">Release Date:  ${phoneinfo.releaseDate} </h5>
+
+        </div>
+    `
+    phoneDetails.appendChild(div)
 
 }
