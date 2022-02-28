@@ -6,6 +6,8 @@ const loadPhones=()=>{
 }
 loadPhones();
 
+// phone search load 
+
 const searchPhone=()=>{
     const searchField=document.getElementById("search-field")
     const searchError=document.getElementById("search-error")
@@ -33,6 +35,7 @@ const searchPhone=()=>{
     .then(queries=>showPhones(queries.data));
     }
 }
+// show results 
 
 const showPhones=phones=>{
     const searchResult=document.getElementById("search-result")
@@ -52,7 +55,7 @@ const showPhones=phones=>{
         const div=document.createElement("div");
         div.classList.add("col");
         div.innerHTML=`
-        <div class="card h-100" style="width: 18rem;">
+        <div class="card h-100 mx-auto" style="width: 18rem;">
             <img src="${phone.image}" style="width: 150px; margin-left:70px"  class="card-img-top" alt="...">
             <div class="card-body" style="margin-left:50px">
               <h5 class="card-title">${phone.phone_name}</h5>
@@ -66,6 +69,8 @@ const showPhones=phones=>{
    
 
 }
+
+// load phone id 
 const loadPhoneDetail=phoneid=>{
     console.log(phoneid);
     const url= `https://openapi.programming-hero.com/api/phone/${phoneid}`
