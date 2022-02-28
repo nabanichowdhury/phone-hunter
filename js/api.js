@@ -8,7 +8,17 @@ loadPhones();
 
 const searchPhone=()=>{
     const searchField=document.getElementById("search-field")
+    const searchError=document.getElementById("search-error")
     const searchText=searchField.value.toLowerCase() ;
+    if(searchText==""){
+        const div=document.createElement("div");
+        div.innerHTML=`
+        <h1>Please search a item's name :)</h1>
+
+        `
+        searchError.appendChild(div)
+        return;
+    }
     searchField.value="";
     // console.log(searchText)  ;
     const url=`https://openapi.programming-hero.com/api/phones?search=${searchText}`
@@ -22,17 +32,26 @@ const showPhones=phones=>{
     const searchResult=document.getElementById("search-result")
     searchResult.textContent="";
     const twentyPhone=phones.slice(0,20);
+    if(phones.length==0){
+        const div=document.createElement("div");
+        div.innerHTML=`
+        <h1>No element found :(</h1>
+
+        `
+        searchResult.appendChild(div)
+        return;
+    }
     twentyPhone.forEach(phone=>{
         console.log(phone);
         const div=document.createElement("div");
         div.classList.add("col");
         div.innerHTML=`
-        <div onclick="loadPhoneDetail('${phone.slug}')"class="card h-100" style="width: 18rem;">
+        <div class="card h-100" style="width: 18rem;">
             <img src="${phone.image}" style="width: 150px; margin-left:70px"  class="card-img-top" alt="...">
             <div class="card-body" style="margin-left:50px">
               <h5 class="card-title">${phone.phone_name}</h5>
               <p class="card-text">Brand:${phone.brand}</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <button href="#"  onclick="loadPhoneDetail('${phone.slug}')" class="btn btn-primary">Go somewhere</button>
             </div>
           </div>
         `;
@@ -54,6 +73,7 @@ const showPhoneDetails=phoneinfo=>{
     const others=phoneinfo.others;
     const pairs=Object.entries(others);
     const phoneDetails=document.getElementById("phone-details");
+    phoneDetails.textContent="";
     const div=document.createElement("div");
     div.classList.add("card");
     div.innerHTML=` 
