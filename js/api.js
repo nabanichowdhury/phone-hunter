@@ -16,6 +16,8 @@ const searchPhone=()=>{
     if(searchText==""){
         const searchResult=document.getElementById("search-result")
     searchResult.textContent="";
+    const phoneDetails=document.getElementById("phone-details");
+    phoneDetails.textContent="";
         div.innerHTML=`
         <h1>Please search a item's name :)</h1>
 
