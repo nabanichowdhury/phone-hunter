@@ -14,7 +14,8 @@ const searchPhone=()=>{
     const searchText=searchField.value.toLowerCase() ;
     const div=document.createElement("div");
     if(searchText==""){
-        
+        const searchResult=document.getElementById("search-result")
+    searchResult.textContent="";
         div.innerHTML=`
         <h1>Please search a item's name :)</h1>
 
@@ -40,6 +41,8 @@ const searchPhone=()=>{
 const showPhones=phones=>{
     const searchResult=document.getElementById("search-result")
     searchResult.textContent="";
+    const phoneDetails=document.getElementById("phone-details");
+    phoneDetails.textContent="";
     const twentyPhone=phones.slice(0,20);
     if(phones.length==0){
         const div=document.createElement("div");
